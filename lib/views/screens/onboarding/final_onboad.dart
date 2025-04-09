@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunday_mall/views/screens/auth/signup/signup_screen.dart';
-
 import '../auth/login/signin_with_email.dart';
-import '../auth/signup/registration_screen.dart';
 
 class FinalOnboardingScreen extends StatelessWidget {
   const FinalOnboardingScreen({super.key});
@@ -77,6 +75,8 @@ class FinalOnboardingScreen extends StatelessWidget {
                       color: Colors.black54,
                     ),
                   ),
+
+
                   const Spacer(),
 
                   ElevatedButton(

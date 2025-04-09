@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_employeeid.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_phone_number.dart';
+import '../../../../widgets/gradient_button.dart';
 import '../../forgotpassword/email_verification.dart';
 import '../signup/signup_screen.dart';
 
@@ -160,45 +161,20 @@ class _SigninWithEmailState extends State<SigninWithEmail> {
                       SizedBox(
                         width: double.infinity,
                         height: 50,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            if (_formKey.currentState!.validate()) {
-                              print("Email: ${emailController.text}");
-                              print("Password: ${passwordController.text}");
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text("Login successful!"),
-                                ),
-                              );
-                            }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF3A3CF5), Color(0xFF6367F5)],
-                              ),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: Container(
-                              alignment: Alignment.center,
-                              child: const Text(
-                                "Sign In",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                          child: GradientButton(
+                            text: 'Sign In',
+                            gradientColors: [Color(0xFF3A3CF5), Color(0xFF6367F5)],
+                            onPressed: () {
+                              if (_formKey.currentState!.validate()) {
+                                print("Email: ${emailController.text}");
+                                print("Password: ${passwordController.text}");
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text("Login successful!"),
+                                  ),
+                                );
+                              }
+                          },)
                       ),
                       const SizedBox(height: 24),
                       const Row(

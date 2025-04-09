@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sunday_mall/views/screens/forgotpassword/set_new_password.dart';
+
+import '../../../widgets/gradient_button.dart';
 
 class OtpVerificationScreens extends StatelessWidget {
   final String phoneNumber;
@@ -34,36 +37,43 @@ class OtpVerificationScreens extends StatelessWidget {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         const Text(
-                          "Sign In Phone Number",
+                          "Forgot Password",
                           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                         ),
                         const SizedBox(height: 8),
-                        Text(
-                          "Sign in code has been sent to $phoneNumber, check your inbox to continue the sign in process.",
+                        const Text(
+                          "A reset code has been sent to Tonald@work.com, check your email to continue the password reset process.",
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.grey),
+                          style: TextStyle(color: Colors.grey),
                         ),
                         const SizedBox(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(6, (_) {
-                            return const SizedBox(
-                              width: 48,
-                              child: TextField(
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                maxLength: 1,
-                                style: TextStyle(fontSize: 20),
-                                decoration: InputDecoration(
-                                  counterText: '',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
+
+                        PinCodeTextField(
+                          appContext: context,
+                          length: 6,
+                          obscureText: false,
+                          animationType: AnimationType.fade,
+                          keyboardType: TextInputType.number,
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.box,
+                            borderRadius: BorderRadius.circular(12),
+                            fieldHeight: 50,
+                            fieldWidth: 45,
+                            activeFillColor: Colors.white,
+                            inactiveFillColor: Colors.white,
+                            selectedFillColor: Colors.white,
+                            activeColor: Colors.deepPurple,
+                            selectedColor: Colors.deepPurple,
+                            inactiveColor: Colors.grey.shade400,
+                          ),
+                          animationDuration: const Duration(milliseconds: 300),
+                          enableActiveFill: true,
+                          onChanged: (value) {},
+                          onCompleted: (value) {
+                            // auto submit if needed
+                          },
                         ),
+
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -85,19 +95,13 @@ class OtpVerificationScreens extends StatelessWidget {
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: ElevatedButton(
+                          child: GradientButton(
+                            text: 'Submit',
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => SetNewPasswordScreen(),));
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: const Text("Submit", style: TextStyle(color: Colors.white)),
-                          ),
+
+                              Navigator.push(context, MaterialPageRoute(builder: (context) => const SetNewPasswordScreen(),));
+
+                            },),
                         ),
                         const SizedBox(height: 40),
                         TextButton(

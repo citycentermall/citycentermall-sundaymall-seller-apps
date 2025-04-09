@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:sunday_mall/views/screens/forgotpassword/password_has_been_created.dart';
 
+import '../../../widgets/gradient_button.dart';
+
 class SetNewPasswordScreen extends StatefulWidget {
   const SetNewPasswordScreen({super.key});
 
@@ -127,37 +129,14 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
 
                           const SizedBox(height: 32),
 
-                          // Submit Button
                           SizedBox(
                             width: double.infinity,
                             height: 50,
-                            child: ElevatedButton(
+                            child: GradientButton(
+                              text: 'Submit',
                               onPressed: () {
                                 Navigator.push(context, MaterialPageRoute(builder: (context) => PasswordHasBeenCreated(),));
-                              },
-                              style: ElevatedButton.styleFrom(
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                                padding: const EdgeInsets.all(0),
-                                elevation: 0,
-                                backgroundColor: Colors.transparent,
-                                shadowColor: Colors.transparent,
-                              ),
-                              child: Ink(
-                                decoration: BoxDecoration(
-                                  gradient: const LinearGradient(
-                                    colors: [Color(0xFF3549C4), Color(0xFF19235E)],
-                                  ),
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                child: Container(
-                                  alignment: Alignment.center,
-                                  child: const Text(
-                                    "Submit",
-                                    style: TextStyle(color: Colors.white, fontSize: 16),
-                                  ),
-                                ),
-                              ),
-                            ),
+                              },),
                           ),
                           const SizedBox(height: 16),
                         ],
@@ -165,7 +144,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                     ),
                   ),
 
-                  // Security Icon (half inside card)
                   Positioned(
                     top: -35,
                     left: size.width / 2 - 35,

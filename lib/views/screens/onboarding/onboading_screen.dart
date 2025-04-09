@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
+import '../../../widgets/gradient_button.dart';
 import 'final_onboad.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -17,19 +18,19 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
 
   final List<Map<String, dynamic>> onboardingData = [
     {
-      "image": "assets/images/onboad1.png",
+      "image": "assets/images/on_first_image.png",
       "title": "Simplify Bulk Purchases with SundayMalls!",
       "subtitle":
       "Streamline your buying process and access exclusive deals with trusted suppliers — all in one place.",
     },
     {
-      "image": "assets/images/onboad2.png",
+      "image": "assets/images/on_second_image.png",
       "title": "Bulk Buying Made Easy – Start Today!",
       "subtitle":
       "Save time, money, and effort with seamless bulk ordering and personalized supplier connections.",
     },
     {
-      "image": "assets/images/onboad3.png",
+      "image": "assets/images/on_fourth_image.png",
       "title": "Empower Your Business with SundayMalls!",
       "subtitle":
       "Boost efficiency, reduce costs, and grow your business with our powerful bulk buying platform.",
@@ -156,7 +157,11 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                   ),
 
                   const SizedBox(height: 24),
-                  ElevatedButton(
+                  GradientButton(
+                    text:    currentIndex == onboardingData.length - 1
+                        ? "Next"
+                        : "Next",
+                       backgroundColor: Color(0xFFFF6600),
                     onPressed: () {
                       if (currentIndex == onboardingData.length - 1) {
                         Navigator.push(
@@ -169,22 +174,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                           curve: Curves.easeInOut,
                         );
                       }
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFFFF6600),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      minimumSize: const Size(double.infinity, 50),
-                    ),
-                    child: Text(
-                      currentIndex == onboardingData.length - 1
-                          ? "Next"
-                          : "Next",style: TextStyle(
-                    color: Colors.white,
-                    ),
-                    ),
-                  ),
+                    },),
                   const SizedBox(height: 10),
                   OutlinedButton(
                     onPressed: () {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_phone_number.dart';
+import '../../../../widgets/gradient_button.dart';
 import '../../forgotpassword/email_verification.dart';
 
 class SigninWithEmployeeId extends StatefulWidget {
@@ -133,35 +134,9 @@ class _SigninWithEmployeeIdState extends State<SigninWithEmployeeId> {
                     SizedBox(
                       width: double.infinity,
                       height: 50,
-                      child: ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          padding: EdgeInsets.zero,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          backgroundColor: Colors.transparent,
-                          shadowColor: Colors.transparent,
-                        ),
-                        child: Ink(
-                          decoration: BoxDecoration(
-                            gradient: const LinearGradient(
-                              colors: [Color(0xFF3A3CF5), Color(0xFF6367F5)],
-                            ),
-                            borderRadius: BorderRadius.circular(30),
-                          ),
-                          child: Container(
-                            alignment: Alignment.center,
-                            child: const Text(
-                              "Sign In",
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
+                      child:  GradientButton(
+                        text: 'Sign in',
+                        onPressed: () {  },),
                     ),
 
                     const SizedBox(height: 24),

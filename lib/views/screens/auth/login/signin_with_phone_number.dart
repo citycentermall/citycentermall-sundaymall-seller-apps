@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:country_picker/country_picker.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_employeeid.dart';
+import '../../../../widgets/gradient_button.dart';
 import '../../forgotpassword/email_verification.dart';
 import 'otp_verification.dart';
 
@@ -152,17 +153,17 @@ class _SigninWithPhoneNumberState extends State<SigninWithPhoneNumber> {
                       ),
 
                       const SizedBox(height: 12),
+
                       SizedBox(
                         width: double.infinity,
                         height: 50,
-                        child: ElevatedButton(
+                        child: GradientButton(
+                          text: 'Sign',
                           onPressed: () {
                             if (_formKey.currentState!.validate()) {
                               final fullNumber =
                                   "+${selectedCountry.phoneCode}${phoneController.text}";
                               print("Logging in with: $fullNumber");
-
-                              // ✅ Navigate to OTP screen
                               Navigator.push(
                                 context,
                                 MaterialPageRoute(
@@ -170,33 +171,7 @@ class _SigninWithPhoneNumberState extends State<SigninWithPhoneNumber> {
                                 ),
                               );
                             }
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: EdgeInsets.zero,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            backgroundColor: Colors.transparent,
-                            shadowColor: Colors.transparent,
-                          ),
-                          child: Ink(
-                            decoration: BoxDecoration(
-                              gradient: const LinearGradient(
-                                colors: [Color(0xFF3A3CF5), Color(0xFF6367F5)],
-                              ),
-                              borderRadius: BorderRadius.circular(30),
-                            ),
-                            child: const Center(
-                              child: Text(
-                                "Sign In",
-                                style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                          },),
                       ),
 
                       const SizedBox(height: 24),

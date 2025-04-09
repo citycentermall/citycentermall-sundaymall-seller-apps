@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
+import 'package:sunday_mall/views/screens/auth/signup/registration_screen.dart';
+
+import '../../../../widgets/gradient_button.dart';
 
 class SignupScreen extends StatefulWidget {
   const SignupScreen({super.key});
@@ -102,42 +105,16 @@ class _SignupScreenState extends State<SignupScreen> {
               SizedBox(
                 width: double.infinity,
                 height: 50,
-                child: ElevatedButton(
+                child:  GradientButton(
+                  text: 'Continue',
                   onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen(),));
 
-                  },
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.zero,
-                    backgroundColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    elevation: 0,
-                    shadowColor: Colors.transparent,
-                  ),
-                  child: Ink(
-                    decoration: BoxDecoration(
-                      gradient: const LinearGradient(
-                        colors: [Color(0xFF3A3CF5), Color(0xFF6367F5)],
-                      ),
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    child: const Center(
-                      child: Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+                  },),
               ),
 
               const SizedBox(height: 16),
 
-              /// Sign in link
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:sunday_mall/views/screens/forgotpassword/set_new_password.dart';
 
-class OtpVerificationScreen extends StatefulWidget {
+import '../../../../widgets/gradient_button.dart';
+
+class OtpVerificationScreen extends StatelessWidget {
   final String phoneNumber;
 
   const OtpVerificationScreen({super.key, required this.phoneNumber});
 
-  @override
-  State<OtpVerificationScreen> createState() => _OtpVerificationScreenState();
-}
-
-class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -17,7 +16,6 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
     final halfIconHeight = iconHeight / 2;
 
     return Scaffold(
-      resizeToAvoidBottomInset: true,
       backgroundColor: const Color(0xFF0B0F4E),
       body: SingleChildScrollView(
         child: Column(
@@ -25,9 +23,7 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
             SizedBox(height: size.height * 0.45),
             Container(
               width: double.infinity,
-              constraints: BoxConstraints(
-                minHeight: size.height * 0.55,
-              ),
+              constraints: BoxConstraints(minHeight: size.height * 0.55),
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -46,31 +42,39 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                         ),
                         const SizedBox(height: 8),
                         Text(
-                          "Sign in code has been sent to ${widget.phoneNumber}, check your inbox to continue the sign in process.",
+                          "Sign in code has been sent to {$phoneNumber}, check your inbox to continue the sign in process.",
                           textAlign: TextAlign.center,
                           style: const TextStyle(color: Colors.grey),
                         ),
                         const SizedBox(height: 24),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: List.generate(6, (index) {
-                            return const SizedBox(
-                              width: 48,
-                              child: TextField(
-                                textAlign: TextAlign.center,
-                                keyboardType: TextInputType.number,
-                                maxLength: 1,
-                                style: TextStyle(fontSize: 20),
-                                decoration: InputDecoration(
-                                  counterText: '',
-                                  border: OutlineInputBorder(
-                                    borderRadius: BorderRadius.all(Radius.circular(12)),
-                                  ),
-                                ),
-                              ),
-                            );
-                          }),
+
+                        /// 👇 Pin Code OTP Fields
+                        PinCodeTextField(
+                          appContext: context,
+                          length: 6,
+                          obscureText: false,
+                          animationType: AnimationType.fade,
+                          keyboardType: TextInputType.number,
+                          pinTheme: PinTheme(
+                            shape: PinCodeFieldShape.box,
+                            borderRadius: BorderRadius.circular(12),
+                            fieldHeight: 50,
+                            fieldWidth: 45,
+                            activeFillColor: Colors.white,
+                            inactiveFillColor: Colors.white,
+                            selectedFillColor: Colors.white,
+                            activeColor: Colors.deepPurple,
+                            selectedColor: Colors.deepPurple,
+                            inactiveColor: Colors.grey.shade400,
+                          ),
+                          animationDuration: const Duration(milliseconds: 300),
+                          enableActiveFill: true,
+                          onChanged: (value) {},
+                          onCompleted: (value) {
+                            // auto submit if needed
+                          },
                         ),
+
                         const SizedBox(height: 20),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -92,17 +96,11 @@ class _OtpVerificationScreenState extends State<OtpVerificationScreen> {
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: ElevatedButton(
-                            onPressed: () {},
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: const Text("Submit", style: TextStyle(color: Colors.white)),
-                          ),
+                            child: GradientButton(
+                              text: 'Submit',
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const SetNewPasswordScreen()));
+                              },),
                         ),
                         const SizedBox(height: 40),
                         TextButton(

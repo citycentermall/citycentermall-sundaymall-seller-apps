@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../widgets/gradient_button.dart';
 import 'forgot_password_otp_verification.dart';
 
 class ForgotPasswordEmailVerifyScreeen extends StatefulWidget {
@@ -11,7 +12,7 @@ class ForgotPasswordEmailVerifyScreeen extends StatefulWidget {
 
 class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVerifyScreeen> {
   final TextEditingController emailController = TextEditingController();
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -82,20 +83,11 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
                             ),
                             borderRadius: BorderRadius.circular(30),
                           ),
-                          child: ElevatedButton(
+                          child: GradientButton(
+                            text: 'Send Verification code',
                             onPressed: () {
                               Navigator.push(context, MaterialPageRoute(builder: (context) => OtpVerificationScreens(phoneNumber: 'masum@gmail.com',),));
-
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.transparent,
-                              shadowColor: Colors.transparent,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(30),
-                              ),
-                            ),
-                            child: const Text("Send Verification Code", style: TextStyle(color: Colors.white)),
-                          ),
+                            },),
                         ),
                         const SizedBox(height: 40), // Button lower
                       ],

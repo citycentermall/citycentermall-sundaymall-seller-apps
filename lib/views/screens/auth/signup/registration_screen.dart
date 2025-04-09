@@ -1,5 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
+import 'package:sunday_mall/views/screens/auth/signup/send_email_otp.dart';
+import 'package:sunday_mall/views/screens/auth/signup/tearms_and_condition.dart';
+
+import '../../../../widgets/gradient_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
   const RegistrationScreen({super.key});
@@ -20,13 +24,13 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.symmetric(horizontal: width * 0.06, vertical: height * 0.04),
+          padding: EdgeInsets.symmetric(horizontal: width * 0.06, vertical: height * 0.01),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               SizedBox(height: height * 0.04),
-
-              Icon(Icons.shopping_bag_outlined, size: 60, color: Colors.deepPurple),
+              Image.asset("assets/images/sunday_mall.png",height: 150,),
+             // Icon(Icons.shopping_bag_outlined, size: 60, color: Colors.deepPurple),
               SizedBox(height: height * 0.02),
               const Text(
                 'SundayMall',
@@ -74,29 +78,40 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   Checkbox(
                     value: isChecked,
                     onChanged: (value) {
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        backgroundColor: Colors.transparent,
+                        builder: (_) => TermsConditionsPopup(
+                          onAgree: () {
+                            setState(() {
+                              isChecked = true;
+                            });
+                            Navigator.pop(context);
+                          },
+                        ),
+
+                      );
                       setState(() {
                         isChecked = value!;
                       });
                     },
+
                   ),
                   Expanded(
                     child: RichText(
-                      text: TextSpan(
-                        text: 'I agree with',
-                        style: const TextStyle(color: Colors.black, fontSize: 12),
+                      text: const TextSpan(
+                        text: 'I agree with ',
+                        style: TextStyle(color: Colors.black, fontSize: 12),
                         children: [
                           TextSpan(
                             text: 'Terms & Conditions ',
-                            style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {},
+                            style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                           ),
-                          const TextSpan(text: 'and '),
+                          TextSpan(text: 'and '),
                           TextSpan(
                             text: 'Privacy Policy',
-                            style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {},
+                            style: TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),
                           ),
                         ],
                       ),
@@ -105,6 +120,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ],
               ),
 
+
               SizedBox(height: height * 0.02),
 
               // Gradient Button
@@ -112,31 +128,20 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 width: double.infinity,
                 height: 50,
                 decoration: BoxDecoration(
-                  gradient: const LinearGradient(
-                    colors: [Color(0xFF5D5FEF), Color(0xFF6BC0FF)],
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                  ),
                   borderRadius: BorderRadius.circular(12),
                 ),
-                child: ElevatedButton(
-                  onPressed: () {},
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.transparent,
-                    shadowColor: Colors.transparent,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                  ),
-                  child: const Text(
-                    'Sign Up',
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.white,
-                    ),
-                  ),
-                ),
+                child:  GradientButton(
+                  text: 'Sign Up',textStyle: TextStyle(fontWeight: FontWeight.bold,color: Colors.white),
+                  onPressed: () {
+                    showModalBottomSheet(
+                      context: context,
+                      isScrollControlled: true,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+                      ),
+                      builder: (context) => SendEmailOtp(),
+                    );
+                  },),
               ),
               SizedBox(height: height * 0.02),
 
@@ -146,7 +151,7 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   const Text('Already have an account? ', style: TextStyle(fontSize: 14)),
                   GestureDetector(
                     onTap: () {
-                      // TODO: Navigate to Sign In
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
                     },
                     child: const Text(
                       'Sign in here',
