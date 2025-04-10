@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/gradient_button.dart';
 import 'complete_profile.dart';
 
 class UpdatedProfile extends StatelessWidget {
@@ -45,28 +46,11 @@ class UpdatedProfile extends StatelessWidget {
                   SizedBox(
                     width: double.infinity,
                     height: 48,
-                    child: ElevatedButton(
+                    child: GradientButton(
+                      text: "Continue",
                       onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const ProfileScreen()),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF19235E),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                      ),
-                      child: const Text(
-                        "Continue",
-                        style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),));
+                      },)
                   ),
                 ],
               ),
@@ -93,6 +77,7 @@ class UpdatedProfile extends StatelessWidget {
                   color: Colors.white,
                   size: 32,
                 ),
+               // child: Image.asset("assets/images/Property.png"),
               ),
             ),
           ],

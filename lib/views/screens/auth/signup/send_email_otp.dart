@@ -97,7 +97,6 @@ class SendEmailOtp extends StatelessWidget {
                 ],
               ),
             ),
-
             // Top Icon
             Positioned(
               top: -halfIconHeight,

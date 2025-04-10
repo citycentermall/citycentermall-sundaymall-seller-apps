@@ -18,6 +18,9 @@ class OtpVerificationScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFF0B0F4E),
       body: SingleChildScrollView(
+        padding: EdgeInsets.only(
+          bottom: MediaQuery.of(context).viewInsets.bottom,
+        ),
         child: Column(
           children: [
             SizedBox(height: size.height * 0.45),
@@ -99,7 +102,16 @@ class OtpVerificationScreen extends StatelessWidget {
                             child: GradientButton(
                               text: 'Submit',
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const SetNewPasswordScreen()));
+                                Navigator.pop(context);
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                                  ),
+                                  builder: (context) =>  SetNewPasswordScreen(),
+                                );
+                              //  Navigator.push(context, MaterialPageRoute(builder: (context) =>  SetNewPasswordScreen()));
                               },),
                         ),
                         const SizedBox(height: 40),
@@ -128,7 +140,7 @@ class OtpVerificationScreen extends StatelessWidget {
                       width: iconHeight,
                       height: iconHeight,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF7D5DF6),
+                        color: const Color(0xFF3649C3),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(

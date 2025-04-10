@@ -3,6 +3,7 @@ import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
 import 'package:sunday_mall/views/screens/auth/signup/send_email_otp.dart';
 import 'package:sunday_mall/views/screens/auth/signup/tearms_and_condition.dart';
 
+import '../../../../widgets/custom_input_field.dart';
 import '../../../../widgets/gradient_button.dart';
 
 class RegistrationScreen extends StatefulWidget {
@@ -50,10 +51,32 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               _buildDropdown(label: 'Business Type', icon: Icons.business),
               SizedBox(height: height * 0.02),
 
-              _buildTextField(label: 'GST No', prefixIcon: Icons.confirmation_num_outlined),
+              // _buildTextField(label: 'GST No', prefixIcon: Icons.confirmation_num_outlined),
+              CustomInputField(
+                label: 'GST No',
+                hintText: 'Enter GST No',
+                prefixIcon: Icons.confirmation_num_outlined,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your GST number';
+                  }
+                  return null;
+                },
+              ),
+
               SizedBox(height: height * 0.02),
 
-              _buildTextField(label: 'Address', prefixIcon: Icons.location_on),
+              CustomInputField(
+                label: 'Address',
+                hintText: 'Enter Address ',
+                prefixIcon: Icons.location_on,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your Address';
+                  }
+                  return null;
+                },
+              ),
               SizedBox(height: height * 0.02),
 
               _buildDropdown(label: 'Choose Your State', icon: Icons.map_outlined),
@@ -62,11 +85,31 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               Row(
                 children: [
                   Expanded(
-                    child: _buildTextField(label: 'Pincode', prefixIcon: Icons.pin_drop_outlined),
+                    child:    CustomInputField(
+                      label: 'Pincode',
+                      hintText: 'Enter GST No',
+                      prefixIcon: Icons.pin_drop_outlined,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your pincode';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                   const SizedBox(width: 10),
                   Expanded(
-                    child: _buildTextField(label: 'City', prefixIcon: Icons.location_city_outlined),
+                    child:    CustomInputField(
+                      label: 'City',
+                      hintText: 'Enter City',
+                      prefixIcon: Icons.pin_drop_outlined,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your City';
+                        }
+                        return null;
+                      },
+                    ),
                   ),
                 ],
               ),
@@ -120,7 +163,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                 ],
               ),
 
-
               SizedBox(height: height * 0.02),
 
               // Gradient Button
@@ -151,6 +193,16 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
                   const Text('Already have an account? ', style: TextStyle(fontSize: 14)),
                   GestureDetector(
                     onTap: () {
+                      // Navigator.pop(context);
+                      // showModalBottomSheet(
+                      //   context: context,
+                      //   isScrollControlled: true,
+                      //   shape: const RoundedRectangleBorder(
+                      //     borderRadius:
+                      //     BorderRadius.vertical(top: Radius.circular(32)),
+                      //   ),
+                      //   builder: (context) => const SigninWithEmail(),
+                      // );
                       Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
                     },
                     child: const Text(
@@ -166,18 +218,6 @@ class _RegistrationScreenState extends State<RegistrationScreen> {
               ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget _buildTextField({required String label, IconData? prefixIcon}) {
-    return TextField(
-      decoration: InputDecoration(
-        labelText: label,
-        prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
         ),
       ),
     );

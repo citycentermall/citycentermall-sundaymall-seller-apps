@@ -1,44 +1,40 @@
 import 'package:flutter/material.dart';
-import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
-
+import '../../../widgets/custom_input_field.dart';
 import '../../../widgets/gradient_button.dart';
+import '../auth/login/signin_with_email.dart';
+import 'forgot_password_otp_verification.dart';
 
-class PasswordHasBeenCreated extends StatefulWidget {
-  const PasswordHasBeenCreated({super.key});
-
-  @override
-  State<PasswordHasBeenCreated> createState() => _PasswordHasBeenCreatedState();
-}
-
-class _PasswordHasBeenCreatedState extends State<PasswordHasBeenCreated> {
+class PasswordHasBeenCreated extends StatelessWidget {
+  PasswordHasBeenCreated({super.key});
+  final TextEditingController emailController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
+    final viewInsets = MediaQuery.of(context).viewInsets.bottom;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: true,
-      backgroundColor: const Color(0xFF0B0F4E),
-      body: Stack(
-        children: [
-          // Blurred background overlay
-          Opacity(
-            opacity: 0.3,
-            child: Container(
-              color: Colors.black,
-              width: size.width,
-              height: size.height,
-            ),
-          ),
+    const iconHeight = 64.0;
+    const halfIconHeight = iconHeight / 2;
 
-          // Main content
-          Align(
-            alignment: Alignment.bottomCenter,
-            child: SingleChildScrollView(
-              padding: EdgeInsets.only(
-                bottom: MediaQuery.of(context).viewInsets.bottom,
+    return Padding(
+      padding: EdgeInsets.only(bottom: viewInsets),
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children: [
+            SizedBox(height: size.height * 0.40),
+            Container(
+              width: double.infinity,
+              height: size.height * 0.50,
+              decoration: const BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
               ),
               child: Stack(
                 clipBehavior: Clip.none,
@@ -72,7 +68,16 @@ class _PasswordHasBeenCreatedState extends State<PasswordHasBeenCreated> {
                             child: GradientButton(
                               text: 'Sign In', textStyle: TextStyle(fontSize: 16,color: Colors.white),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
+                                Navigator.pop(context);
+                                showModalBottomSheet(
+                                  context: context,
+                                  isScrollControlled: true,
+                                  shape: const RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                                  ),
+                                  builder: (context) =>  SigninWithEmail(),
+                                );
+                               // Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
                               },),
                           ),
                           const SizedBox(height: 16),
@@ -85,8 +90,8 @@ class _PasswordHasBeenCreatedState extends State<PasswordHasBeenCreated> {
                     top: -35,
                     left: size.width / 2 - 35,
                     child: Container(
-                      width: 70,
-                      height: 70,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: const Color(0xFF3649C3),
                         borderRadius: BorderRadius.circular(20),
@@ -98,18 +103,19 @@ class _PasswordHasBeenCreatedState extends State<PasswordHasBeenCreated> {
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.lock,
-                        color: Colors.white,
-                        size: 32,
-                      ),
+                      child: Image.asset("assets/images/securety.png"),
+                      // child: const Icon(
+                      //   Icons.lock,
+                      //   color: Colors.white,
+                      //   size: 32,
+                      // ),
                     ),
                   ),
                 ],
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

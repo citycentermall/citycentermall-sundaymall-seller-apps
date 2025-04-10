@@ -1,18 +1,12 @@
 import 'package:flutter/material.dart';
-
+import '../../../widgets/custom_input_field.dart';
 import '../../../widgets/gradient_button.dart';
 import 'forgot_password_otp_verification.dart';
 
-class ForgotPasswordEmailVerifyScreeen extends StatefulWidget {
-  const ForgotPasswordEmailVerifyScreeen({super.key});
-
-  @override
-  State<ForgotPasswordEmailVerifyScreeen> createState() => _ForgotPasswordEmailVerifyScreeenState();
-}
-
-class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVerifyScreeen> {
+class ForgotPasswordEmailVerifyScreeen extends StatelessWidget {
+  ForgotPasswordEmailVerifyScreeen({super.key});
   final TextEditingController emailController = TextEditingController();
-  //final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
@@ -21,12 +15,16 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
     const iconHeight = 64.0;
     const halfIconHeight = iconHeight / 2;
 
-    return Scaffold(
-      resizeToAvoidBottomInset: false,
-      backgroundColor: const Color(0xFF0B0F4E),
-      body: SingleChildScrollView(
-        padding: EdgeInsets.only(bottom: viewInsets),
-        child: Column(
+    return Padding(
+      padding: EdgeInsets.only(bottom: viewInsets),
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
           children: [
             SizedBox(height: size.height * 0.55),
             Container(
@@ -58,20 +56,20 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
                           style: TextStyle(color: Colors.grey),
                         ),
                         const SizedBox(height: 24),
-                        const Align(
-                          alignment: Alignment.centerLeft,
-                          child: Text("Email"),
-                        ),
-                        const SizedBox(height: 8),
-                        TextField(
-                          decoration: InputDecoration(
-                            hintStyle: TextStyle(color: Colors.grey),
-                            hintText: "My email",
-                            prefixIcon: const Icon(Icons.email_outlined),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(12),
-                            ),
-                          ),
+
+                        CustomInputField(
+                          label: 'Email',
+                          hintText: 'Enter Your Email',
+                          prefixIcon: Icons.email_outlined,
+                          validator: (value) {
+                            if (value == null || value.isEmpty) {
+                              return 'Please enter your email';
+                            } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                                .hasMatch(value)) {
+                              return 'Please enter a valid email';
+                            }
+                            return null;
+                          },
                         ),
                         const SizedBox(height: 24),
                         Container(
@@ -86,7 +84,16 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
                           child: GradientButton(
                             text: 'Send Verification code',
                             onPressed: () {
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => OtpVerificationScreens(phoneNumber: 'masum@gmail.com',),));
+                              Navigator.pop(context);
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                                ),
+                                builder: (context) =>  OtpVerificationScreens(phoneNumber: "masum@gmail.com"),
+                              );
+                             // Navigator.push(context, MaterialPageRoute(builder: (context) => OtpVerificationScreens(phoneNumber: 'masum@gmail.com',),));
                             },),
                         ),
                         const SizedBox(height: 40), // Button lower
@@ -97,8 +104,8 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
                     top: -halfIconHeight,
                     left: size.width / 2 - 32,
                     child: Container(
-                      width: 70,
-                      height: 70,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: const Color(0xFF3649C3),
                         borderRadius: BorderRadius.circular(20),
@@ -110,11 +117,12 @@ class _ForgotPasswordEmailVerifyScreeenState extends State<ForgotPasswordEmailVe
                           ),
                         ],
                       ),
-                      child: const Icon(
-                        Icons.security,
-                        color: Colors.white,
-                        size: 32,
-                      ),
+                      // child: const Icon(
+                      //   Icons.security,
+                      //   color: Colors.white,
+                      //   size: 32,
+                      // ),
+                      child: Image.asset("assets/images/securety.png"),
                     ),
                   ),
                 ],

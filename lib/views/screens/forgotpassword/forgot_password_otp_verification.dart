@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:sunday_mall/views/screens/forgotpassword/set_new_password.dart';
-
+import '../../../text_screen.dart';
+import '../../../widgets/custom_input_field.dart';
 import '../../../widgets/gradient_button.dart';
+import 'forgot_password_otp_verification.dart';
 
 class OtpVerificationScreens extends StatelessWidget {
+  OtpVerificationScreens({super.key, required this.phoneNumber});
   final String phoneNumber;
 
-  const OtpVerificationScreens({super.key, required this.phoneNumber});
 
   @override
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final iconHeight = 64.0;
     final halfIconHeight = iconHeight / 2;
+    final viewInsets = MediaQuery.of(context).viewInsets.bottom;
 
-    return Scaffold(
-      backgroundColor: const Color(0xFF0B0F4E),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
+    return Padding(
+      padding: EdgeInsets.only(bottom: viewInsets),
+      child: Container(
+        width: double.infinity,
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+        ),
+        child: Stack(
+          clipBehavior: Clip.none,
+          children:  [
             SizedBox(height: size.height * 0.45),
             Container(
               width: double.infinity,
@@ -98,8 +107,16 @@ class OtpVerificationScreens extends StatelessWidget {
                           child: GradientButton(
                             text: 'Submit',
                             onPressed: () {
-
-                              Navigator.push(context, MaterialPageRoute(builder: (context) => const SetNewPasswordScreen(),));
+                              Navigator.pop(context);
+                              showModalBottomSheet(
+                                context: context,
+                                isScrollControlled: true,
+                                shape: const RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                                ),
+                                builder: (context) =>  SetNewPasswordScreen(),
+                              );
+                             // Navigator.push(context, MaterialPageRoute(builder: (context) => const SetNewPasswordScreen(),));
 
                             },),
                         ),
@@ -126,10 +143,10 @@ class OtpVerificationScreens extends StatelessWidget {
                     top: -halfIconHeight,
                     left: size.width / 2 - 32,
                     child: Container(
-                      width: iconHeight,
-                      height: iconHeight,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
-                        color: const Color(0xFF7D5DF6),
+                        color: const Color(0xFF3649C3),
                         borderRadius: BorderRadius.circular(20),
                         boxShadow: [
                           BoxShadow(
@@ -139,7 +156,8 @@ class OtpVerificationScreens extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Icon(Icons.call, color: Colors.white, size: 32),
+                      child: Image.asset("assets/images/securety.png"),
+                      //child: const Icon(Icons.call, color: Colors.white, size: 32),
                     ),
                   ),
                 ],

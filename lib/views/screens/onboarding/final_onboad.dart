@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sunday_mall/views/screens/auth/signup/signup_screen.dart';
+import '../../../widgets/gradient_button.dart';
 import '../auth/login/signin_with_email.dart';
 
 class FinalOnboardingScreen extends StatelessWidget {
@@ -79,30 +80,30 @@ class FinalOnboardingScreen extends StatelessWidget {
 
                   const Spacer(),
 
-                  ElevatedButton(
-                    onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
-                    },
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF3649C3),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      minimumSize: const Size(double.infinity, 50),
-                    ),
-                    child: const Text(
-                      "Sign In",style: TextStyle(
-                      color: Colors.white,
-                    ),
-                    ),
-                  ),
+                  GradientButton(
+                      text: "Sign In",
+                      onPressed: () {
+                        showModalBottomSheet(
+                          context: context,
+                          isScrollControlled: true,
+                          shape: const RoundedRectangleBorder(
+                            borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                          ),
+                          builder: (context) => const SigninWithEmail(),
+                        );
+                      },),
                   const SizedBox(height: 20),
 
                   OutlinedButton(
                     onPressed: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => SignupScreen()),
+                      Navigator.pop(context);
+                      showModalBottomSheet(
+                        context: context,
+                        isScrollControlled: true,
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
+                        ),
+                        builder: (context) => const SignupScreen(),
                       );
                     },
                     style: OutlinedButton.styleFrom(

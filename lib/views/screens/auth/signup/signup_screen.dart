@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
+import 'package:country_picker/country_picker.dart';
 import 'package:sunday_mall/views/screens/auth/login/signin_with_email.dart';
 import 'package:sunday_mall/views/screens/auth/signup/registration_screen.dart';
-
+import '../../../../widgets/custom_input_field.dart';
 import '../../../../widgets/gradient_button.dart';
 
 class SignupScreen extends StatefulWidget {
@@ -18,8 +18,18 @@ class _SignupScreenState extends State<SignupScreen> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPasswordController = TextEditingController();
 
+  late Country selectedCountry;
+
+  final _formKey = GlobalKey<FormState>();
+
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedCountry = Country.parse('IN'); // Default to India
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,8 +42,7 @@ class _SignupScreenState extends State<SignupScreen> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const SizedBox(height: 20),
-              Image.asset("assets/images/sunday_mall.png",height: 150,),
-               //const SizedBox(height: 10),
+              Image.asset("assets/images/sunday_mall.png", height: 150),
               const Text(
                 "SundayMall",
                 style: TextStyle(
@@ -48,71 +57,130 @@ class _SignupScreenState extends State<SignupScreen> {
               ),
               const SizedBox(height: 30),
 
-              /// Email
-              _buildInputField(
+              CustomInputField(
+                label: 'Enter Your Email',
+                hintText: 'Enter Your Email',
+                prefixIcon: Icons.email,
                 controller: emailController,
-                hintText: "Enter Your Email",
-                icon: Icons.email_outlined,
-                keyboardType: TextInputType.emailAddress,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your email';
+                  } else if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w]{2,4}')
+                      .hasMatch(value)) {
+                    return 'Please enter a valid email';
+                  }
+                  return null;
+                },
               ),
               const SizedBox(height: 16),
 
-              /// Phone Number with Country Code
-              IntlPhoneField(
-                controller: phoneController,
-                initialCountryCode: 'ID',
-                decoration: InputDecoration(
-                  hintText: '+62 0000 0000 0000',
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  contentPadding: const EdgeInsets.symmetric(vertical: 16, horizontal: 10),
-                ),
-              ),
-              const SizedBox(height: 16),
+              // Row(
+              //   children: [
+              //     GestureDetector(
+              //       onTap: () {
+              //         showCountryPicker(
+              //           context: context,
+              //           showPhoneCode: true,
+              //           onSelect: (Country country) {
+              //             setState(() {
+              //               selectedCountry = country;
+              //             });
+              //           },
+              //         );
+              //       },
+              //       child: Row(
+              //         children: [
+              //           Text(
+              //             "+${selectedCountry.phoneCode}",
+              //             style: const TextStyle(fontSize: 16),
+              //           ),
+              //           const Icon(Icons.arrow_drop_down),
+              //         ],
+              //       ),
+              //     ),
+              //     const SizedBox(width: 8),
+              //     Expanded(
+              //       child: TextFormField(
+              //         controller: phoneController,
+              //         decoration: const InputDecoration(
+              //           hintText: "Enter Phone Number",
+              //           border: InputBorder.none,
+              //           counterText: '',
+              //         ),
+              //         keyboardType: TextInputType.phone,
+              //         maxLength: 10,
+              //         validator: (value) {
+              //           if (value == null || value.isEmpty) {
+              //             return 'Enter phone number';
+              //           } else if (!RegExp(r'^\d{10}$').hasMatch(value)) {
+              //             return 'Phone number must be 10 digits';
+              //           }
+              //           return null;
+              //         },
+              //       ),
+              //     ),
+              //   ],
+              // ),
 
-              /// Password
-              _buildInputField(
+              const SizedBox(height: 16),
+              CustomInputField(
+                label: 'Password',
+                hintText: 'My Password',
+                prefixIcon: Icons.lock_outline,
                 controller: passwordController,
-                hintText: "My Password",
-                icon: Icons.lock_outline,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  } else if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
+                },
                 obscureText: _obscurePassword,
-                suffixIcon: IconButton(
-                  icon: Icon(_obscurePassword ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () => setState(() {
+                showSuffixIcon: true,
+                toggleObscure: () {
+                  setState(() {
                     _obscurePassword = !_obscurePassword;
-                  }),
-                ),
+                  });
+                },
               ),
               const SizedBox(height: 16),
 
-              /// Confirm Password
-              _buildInputField(
+              CustomInputField(
+                label: 'Confirm Password',
+                hintText: 'Confirm My Password',
+                prefixIcon: Icons.lock_outline,
                 controller: confirmPasswordController,
-                hintText: "Confirm My Password",
-                icon: Icons.lock_outline,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your password';
+                  } else if (value.length < 6) {
+                    return 'Password must be at least 6 characters';
+                  }
+                  return null;
+                },
                 obscureText: _obscureConfirmPassword,
-                suffixIcon: IconButton(
-                  icon: Icon(_obscureConfirmPassword ? Icons.visibility_off : Icons.visibility),
-                  onPressed: () => setState(() {
+                showSuffixIcon: true,
+                toggleObscure: () {
+                  setState(() {
                     _obscureConfirmPassword = !_obscureConfirmPassword;
-                  }),
-                ),
+                  });
+                },
               ),
               const SizedBox(height: 30),
 
-              /// Continue Button
               SizedBox(
                 width: double.infinity,
                 height: 50,
-                child:  GradientButton(
+                child: GradientButton(
                   text: 'Continue',
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => RegistrationScreen(),));
-
-                  },),
+                    Navigator.push(context, MaterialPageRoute(
+                      builder: (context) => const RegistrationScreen(),
+                    ));
+                  },
+                ),
               ),
-
               const SizedBox(height: 16),
 
               Row(
@@ -121,7 +189,9 @@ class _SignupScreenState extends State<SignupScreen> {
                   const Text("Already have an account? "),
                   GestureDetector(
                     onTap: () {
-                     Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
+                      Navigator.push(context, MaterialPageRoute(
+                        builder: (context) => const SigninWithEmail(),
+                      ));
                     },
                     child: const Text(
                       "Sign in here",
@@ -133,30 +203,6 @@ class _SignupScreenState extends State<SignupScreen> {
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget _buildInputField({
-    required TextEditingController controller,
-    required String hintText,
-    required IconData icon,
-    bool obscureText = false,
-    Widget? suffixIcon,
-    TextInputType keyboardType = TextInputType.text,
-  }) {
-    return TextField(
-      controller: controller,
-      obscureText: obscureText,
-      keyboardType: keyboardType,
-      decoration: InputDecoration(
-        hintText: hintText,
-        prefixIcon: Icon(icon),
-        suffixIcon: suffixIcon,
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
-        contentPadding: const EdgeInsets.symmetric(vertical: 16),
       ),
     );
   }

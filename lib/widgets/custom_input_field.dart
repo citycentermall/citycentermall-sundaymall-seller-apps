@@ -1,25 +1,28 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class CustomInputField extends StatelessWidget {
   final String label;
   final String hintText;
   final IconData prefixIcon;
-  final TextEditingController controller;
+  final TextEditingController? controller;
   final String? Function(String?) validator;
   final bool obscureText;
   final bool showSuffixIcon;
   final VoidCallback? toggleObscure;
+  final InputBorder? border;
 
   const CustomInputField({
     super.key,
     required this.label,
     required this.hintText,
     required this.prefixIcon,
-    required this.controller,
+    this.controller,
     required this.validator,
     this.obscureText = false,
     this.showSuffixIcon = false,
     this.toggleObscure,
+    this.border,
   });
 
   @override
@@ -45,7 +48,7 @@ class CustomInputField extends StatelessWidget {
               onPressed: toggleObscure,
             )
                 : null,
-            border: OutlineInputBorder(
+            border: border ?? OutlineInputBorder(
               borderRadius: BorderRadius.circular(12),
             ),
           ),
