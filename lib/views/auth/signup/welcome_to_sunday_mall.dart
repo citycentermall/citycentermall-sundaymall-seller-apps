@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:sunday_mall/views/screens/bottom_nav_bar.dart';
-import '../../widgets/gradient_button.dart';
+import 'package:sunday_mall/views/profile/my_work_profile.dart';
+import '../../../widgets/gradient_button.dart';
 
-class UpdatedProfile extends StatelessWidget {
-  const UpdatedProfile({super.key});
+class WelcomeToSundayMall extends StatelessWidget {
+  const WelcomeToSundayMall({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class UpdatedProfile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
-                    "Updated Profile",
+                    "Welcome To SundayMall!",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
@@ -38,26 +38,44 @@ class UpdatedProfile extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    "Your profile has been successfully updated. We're \nexcited to see you take this step!",
+                    "To enhance your user experience, please set up your \n profile first. This will help us tailor the app to your needs \n and ensure you get the most out of our features!",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
                   ),
                   const SizedBox(height: 32),
-                  SizedBox(
-                    width: double.infinity,
-                    height: 48,
-                    child: GradientButton(
-                      text: "Continue",
-                      onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
-                      },)
+
+                  GradientButton(
+                    text: "Set Up My Profile",
+                    onPressed: (){
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => MyWorkProfileScreen(),));
+                    },
                   ),
+                   SizedBox(height: 16),
+
+                  // No Button
+                  OutlinedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    style: OutlinedButton.styleFrom(
+                      side: const BorderSide(color: Color(0xFF19235E)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(30),
+                      ),
+                      minimumSize: const Size.fromHeight(48),
+                    ),
+                    child: const Text(
+                      "Explore The App First",
+                      style: TextStyle(color: Color(0xFF19235E)),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
                 ],
               ),
             ),
             Positioned(
               top: -halfIconHeight,
-              left: size.width / 2 - 35,
+              left: size.width / 2 - 32,
               child: Container(
                 width: 70,
                 height: 70,
@@ -72,12 +90,7 @@ class UpdatedProfile extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: const Icon(
-                  Icons.person,
-                  color: Colors.white,
-                  size: 32,
-                ),
-               // child: Image.asset("assets/images/Property.png"),
+                child: Image.asset("assets/images/Property.png"),
               ),
             ),
           ],

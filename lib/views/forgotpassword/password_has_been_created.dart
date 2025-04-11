@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../widgets/custom_input_field.dart';
 import '../../../widgets/gradient_button.dart';
 import '../auth/login/signin_with_email.dart';
-import 'forgot_password_otp_verification.dart';
 
 class PasswordHasBeenCreated extends StatelessWidget {
   PasswordHasBeenCreated({super.key});
@@ -104,11 +102,6 @@ class PasswordHasBeenCreated extends StatelessWidget {
                         ],
                       ),
                       child: Image.asset("assets/images/securety.png"),
-                      // child: const Icon(
-                      //   Icons.lock,
-                      //   color: Colors.white,
-                      //   size: 32,
-                      // ),
                     ),
                   ),
                 ],

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunday_mall/views/screens/onboarding/onboading_screen.dart';
+import 'package:sunday_mall/views/onboarding/onboading_screen.dart';
 
 void main() {
   runApp(const MyApp());

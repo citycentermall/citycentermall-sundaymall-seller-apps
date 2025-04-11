@@ -17,6 +17,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   late Timer _timer;
 
   final List<Map<String, dynamic>> onboardingData = [
+
     {
       "image": "assets/images/on_first_image.png",
       "title": "Simplify Bulk Purchases with SundayMalls!",
@@ -110,8 +111,6 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
                         ),
                       ),
                     );
-
-
                   },
                 );
               },
@@ -204,6 +203,5 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
     );
   }
 }
-
 
 

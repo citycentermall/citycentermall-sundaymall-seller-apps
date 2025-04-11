@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:sunday_mall/views/screens/auth/login/signin_with_employeeid.dart';
-import 'package:sunday_mall/views/screens/auth/login/signin_with_phone_number.dart';
+import 'package:sunday_mall/views/auth/login/signin_with_employeeid.dart';
+import 'package:sunday_mall/views/auth/login/signin_with_phone_number.dart';
 import '../../../../widgets/custom_input_field.dart';
 import '../../../../widgets/gradient_button.dart';
 import '../../forgotpassword/email_verification.dart';
+import '../../screens/bottom_nav_bar.dart';
+import '../../screens/home_screen.dart';
 import '../signup/signup_screen.dart';
 
 class SigninWithEmail extends StatefulWidget {
@@ -134,18 +136,35 @@ class _SigninWithEmailState extends State<SigninWithEmail> {
                   SizedBox(
                     width: double.infinity,
                     height: 50,
+                    // child: GradientButton(
+                    //   text: 'Sign In',
+                    //   gradientColors: const [
+                    //     Color(0xFF3A3CF5),
+                    //     Color(0xFF6367F5)
+                    //   ],
+                    //   onPressed: () {
+                    //     if (_formKey.currentState!.validate()) {
+                    //       print("Email: ${emailController.text}");
+                    //       print("Password: ${passwordController.text}");
+                    //       ScaffoldMessenger.of(context).showSnackBar(
+                    //         const SnackBar(content: Text("Login successful!")),
+                    //       );
+                    //       Navigator.pushReplacement(
+                    //         context,
+                    //         MaterialPageRoute(builder: (context) => MainPage()),
+                    //       );
+                    //     }
+                    //   },
+                    // ),
                     child: GradientButton(
-                      text: 'Sign In',
-                      gradientColors: const [
-                        Color(0xFF3A3CF5),
-                        Color(0xFF6367F5)
-                      ],
+                      text: 'Sign in',
                       onPressed: () {
                         if (_formKey.currentState!.validate()) {
-                          print("Email: ${emailController.text}");
-                          print("Password: ${passwordController.text}");
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(content: Text("Login successful!")),
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MainPage(),
+                            ),
                           );
                         }
                       },
@@ -167,7 +186,7 @@ class _SigninWithEmailState extends State<SigninWithEmail> {
                   ),
                   const SizedBox(height: 24),
                   _socialLoginButton(
-                    icon: Icons.badge_outlined,
+                    imagePath: 'assets/images/apple.png',
                     label: "Sign in With Employee ID",
                     onTap: () {
                       Navigator.pop(context);
@@ -184,7 +203,7 @@ class _SigninWithEmailState extends State<SigninWithEmail> {
                   ),
                   const SizedBox(height: 12),
                   _socialLoginButton(
-                    icon: Icons.phone,
+                    imagePath: 'assets/images/phone.png',
                     label: "Sign in With Phone",
                     onTap: () {
                       Navigator.pop(context);
@@ -234,24 +253,43 @@ class _SigninWithEmailState extends State<SigninWithEmail> {
   }
 
   Widget _socialLoginButton({
-    required IconData icon,
     required String label,
     required VoidCallback onTap,
+    required String imagePath,
   }) {
     return SizedBox(
       width: double.infinity,
       height: 50,
-      child: OutlinedButton.icon(
+      child: OutlinedButton(
         onPressed: onTap,
-        icon: Icon(icon, color: Colors.black),
-        label: Text(label),
         style: OutlinedButton.styleFrom(
           side: const BorderSide(color: Colors.blue),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(30),
           ),
         ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Image.asset(
+              imagePath,
+              height: 24,
+              width: 24,
+            ),
+            const SizedBox(width: 10),
+            Text(
+              label,
+              style: const TextStyle(
+                color: Colors.blue,
+                fontWeight: FontWeight.w500,
+                fontSize: 15,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
+
+
 }

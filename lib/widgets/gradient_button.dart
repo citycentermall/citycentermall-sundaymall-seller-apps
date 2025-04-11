@@ -16,7 +16,8 @@ class GradientButton extends StatelessWidget {
     required this.text,
     required this.onPressed,
     this.borderRadius = 30.0,
-    this.gradientColors = const [Color(0xFF3A3CF5), Color(0xFF6367F5)],
+    this.gradientColors = const [Color(0xFF3649C3), Color(0xFF283690),Color(0xFF1A235D)
+    ],
     this.backgroundColor,
     this.height = 50,
     this.width,

@@ -117,11 +117,6 @@ class ForgotPasswordEmailVerifyScreeen extends StatelessWidget {
                           ),
                         ],
                       ),
-                      // child: const Icon(
-                      //   Icons.security,
-                      //   color: Colors.white,
-                      //   size: 32,
-                      // ),
                       child: Image.asset("assets/images/securety.png"),
                     ),
                   ),

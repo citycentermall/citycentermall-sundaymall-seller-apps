@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sunday_mall/views/screens/forgotpassword/password_has_been_created.dart';
-import '../../../text_screen.dart';
+import 'package:sunday_mall/views/forgotpassword/password_has_been_created.dart';
 import '../../../widgets/gradient_button.dart';
 
 class SetNewPasswordScreen extends StatefulWidget {
@@ -161,11 +160,6 @@ class _SetNewPasswordScreenState extends State<SetNewPasswordScreen> {
                     ),
                   ],
                 ),
-                // child: const Icon(
-                //   Icons.lock,
-                //   color: Colors.white,
-                //   size: 32,
-                // ),
                 child: Image.asset("assets/images/securety.png"),
               ),
             ),

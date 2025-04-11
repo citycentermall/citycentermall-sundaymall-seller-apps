@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../../widgets/gradient_button.dart';
 
 class TermsConditionsPopup extends StatelessWidget {

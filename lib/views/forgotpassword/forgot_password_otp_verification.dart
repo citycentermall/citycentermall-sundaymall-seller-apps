@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:sunday_mall/views/screens/forgotpassword/set_new_password.dart';
-import '../../../text_screen.dart';
-import '../../../widgets/custom_input_field.dart';
+import 'package:sunday_mall/views/forgotpassword/set_new_password.dart';
 import '../../../widgets/gradient_button.dart';
-import 'forgot_password_otp_verification.dart';
 
 class OtpVerificationScreens extends StatelessWidget {
   OtpVerificationScreens({super.key, required this.phoneNumber});

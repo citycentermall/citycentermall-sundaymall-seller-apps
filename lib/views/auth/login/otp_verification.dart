@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:intl_phone_field/phone_number.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-
+import 'package:sunday_mall/views/screens/bottom_nav_bar.dart';
 import '../../../../widgets/gradient_button.dart';
-import '../../../profile/complete_profile.dart';
 
-class SendEmailOtp extends StatelessWidget {
-  const SendEmailOtp({super.key});
+class OtpVerificationScreen extends StatelessWidget {
+  const OtpVerificationScreen({super.key, required String phoneNumber});
 
   @override
   Widget build(BuildContext context) {
@@ -32,15 +32,15 @@ class SendEmailOtp extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   const Text(
-                    "Email verification sent!",
+                    "Sign In Phone Number",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 20,
                     ),
                   ),
                   const SizedBox(height: 8),
-                  const Text(
-                    "A verification code will be sent to the email \n Hello@work.com for your account verification \n process.",
+                   Text(
+                    "Sign in code has been sent to {$PhoneNumber}, check \n your inbox to continue the sign in process.",
                     textAlign: TextAlign.center,
                     style: TextStyle(color: Colors.grey),
                   ),
@@ -65,7 +65,7 @@ class SendEmailOtp extends StatelessWidget {
                     animationDuration: const Duration(milliseconds: 300),
                     onChanged: (value) {},
                   ),
-                // SizedBox(height: 5,),
+                  // SizedBox(height: 5,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -89,7 +89,7 @@ class SendEmailOtp extends StatelessWidget {
                     child:  GradientButton(
                       text: 'Submit',
                       onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => ProfileScreen(),));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => MainPage(),));
                       },),
                   ),
 
@@ -118,7 +118,7 @@ class SendEmailOtp extends StatelessWidget {
                 child: Padding(
                   padding: const EdgeInsets.all(16.0),
                   child: Image.asset(
-                    'assets/images/massege.png',
+                    'assets/icons/call.png',
                     color: Colors.white,
                   ),
                 ),
@@ -130,3 +130,4 @@ class SendEmailOtp extends StatelessWidget {
     );
   }
 }
+
