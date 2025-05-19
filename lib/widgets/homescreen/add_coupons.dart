@@ -37,6 +37,7 @@ class CouponScreen extends StatelessWidget {
             validator: (value) => value == null || value.isEmpty
                 ? 'Please enter your employee ID'
                 : null,
+            prefixIcon: null,
           ),
           SizedBox(height: screenHeight * 0.015),
           Text(

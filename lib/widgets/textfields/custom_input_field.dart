@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 class CustomInputField extends StatelessWidget {
   final String label;
   final String hintText;
-  final IconData? prefixIcon;
+  // final IconData? prefixIcon;
   final TextEditingController? controller;
   final String? Function(String?) validator;
   final bool obscureText;
@@ -28,6 +28,8 @@ class CustomInputField extends StatelessWidget {
     this.prefixText,
     this.keyboardType,
     this.maxLength,
+    // this.prefixIcon,
+    // this.prefixIcon,
   });
 
   @override
@@ -52,7 +54,7 @@ class CustomInputField extends StatelessWidget {
               child: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  Icon(prefixIcon),
+                  // Icon(prefixIcon),
                   prefixText != null
                       ? const SizedBox(width: 8.0,)
                       : const SizedBox.shrink(),
