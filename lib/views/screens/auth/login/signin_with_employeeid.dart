@@ -184,15 +184,6 @@ class _SigninWithEmployeeIdState extends State<SigninWithEmployeeId> {
                         Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithEmail(),));
                       },
                     ),
-                    const SizedBox(height: 12),
-
-                    _socialLoginButton(
-                      icon: Icons.phone,
-                      label: "Sign in With Phone",
-                      onTap: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => SigninWithPhoneNumber(),));
-                      },
-                    ),
                     const SizedBox(height: 16),
                     Center(
                       child: TextButton(
