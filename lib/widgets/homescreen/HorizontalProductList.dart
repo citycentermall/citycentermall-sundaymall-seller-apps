@@ -6,11 +6,6 @@ class HorizontalProductList extends StatelessWidget {
 
   final List<Map<String, String>> products = const [
     {
-      'name': 'Watch',
-      'price': '\$40',
-      'image': 'assets/featured_products_images/watch.png'
-    },
-    {
       'name': 'Nike Shoes',
       'price': '\$430',
       'image': 'assets/featured_products_images/nike_shoes.png'
@@ -91,15 +86,6 @@ class HorizontalProductList extends StatelessWidget {
                         product['name']!,
                         style: const TextStyle(
                           fontWeight: FontWeight.w600,
-                          fontSize: 13,
-                        ),
-                      ),
-                      const SizedBox(height: 4),
-                      Text(
-                        product['price']!,
-                        style: const TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: AppColors.deepPurple,
                           fontSize: 13,
                         ),
                       ),
